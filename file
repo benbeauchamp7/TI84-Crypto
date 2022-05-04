@@ -1,97 +1,81 @@
 If F≠π
 Then
-0→Y:0→X
+0→X:0→Y
 0→Ymin:0→Xmin
 265→Ymax:164→Xmax:9→Yscl:15→Xscl
-TextColor(BLUE)
-Disp "N=pq, factor w/A"
-Prompt N,A
+Disp "g^x=h (p)"
+Disp "N=ord_p(g)"
+Prompt G,H,P,N
 ClrDraw
 DispGraph
-
-Text(X,Y,"let an=")
-Y+6*Yscl→Y
-A→V
-prgmZOUTNUM
-Text(X,Y,"^(n!)   mod ")
-Y+8*Yscl→Y
-N→V
-prgmZOUTNUM
-Yscl→Y
-X+Xscl→X
-Text(X,Y,">gcd(a_n-1,")
-Y+10*Yscl→Y
-N→V
-prgmZOUTNUM
-Text(X,Y,")")
-0→Y
-X+Xscl→X
-Text(X,Y,"a0=")
-Y+3*Yscl→Y
-A→V
-prgmZOUTNUM
-0→Y
-X+Xscl→X
 End
 
-1→J
-While 1
-Text(X,Y,"a")
-Y+Yscl→Y
-J→V
-prgmZOUTNUM
-Text(X,Y,"=")
-Y+Yscl→Y
-π→S
+int(√(N))+1→N
+ClrList L₃
+G→L₃(1)
+H→L₃(2)
+P→L₃(3)
+N→L₃(4)
 π→F
-A→G
-J→A
+π→S
+P→N
+prgmINVERT
+L₁(dim(L₁))→G
+
+L₃(4)→A
+P→N
 prgmFASTPOW
-TextColor(BLUE)
-R→A
-0→S
+R→K
 0→F
-A→V
-prgmZOUTNUM
-Y+Yscl→Y
-Text(X,Y,"(")
-Y+Yscl→Y
-N→V
-prgmZOUTNUM
-Text(X,Y,") >")
-0→Y
-X+Xscl→X
+0→S
+L₃(1)→G
+L₃(2)→H
+L₃(3)→P
+L₃(4)→N
 
-Text(X,Y,"gcd(")
-Y+4*Yscl→Y
-A-1→V
+0→Y
+0→X
+ClrList L₁
+TextColor(BLUE)
+Text(X,Y,"g^i (p):")
+Y+6*Yscl→Y
+For(I,0,N)
+remainder(G^I,P)→L₁(I+1)
+
+L₁(I+1)→V
 prgmZOUTNUM
-Text(X,Y,",N)=")
-Y+4*Yscl→Y
-gcd(A-1,N)→V
-If V=1 or V=N
+
+If I<N
 Then
-TextColor(RED)
-prgmZOUTNUM
-Else
-TextColor(GREEN)
-prgmZOUTNUM
-
+Text(X,Y,"|")
+Y+Yscl→Y
+End
+End
 0→Y
 X+Xscl→X
-Text(X,Y,"pq=")
-Y+3*Yscl→Y
-prgmZOUTNUM
-Text(X,Y,"*")
-Y+Yscl→Y
-V→R
-N/V→V
-prgmZOUTNUM
-Return
+
+Text(X,Y,"hg^(-ni) (p):")
+Y+10*Yscl→Y
+For(I,0,N)
+If I>0
+remainder(H*K,P)→H
+
+For(J,1,dim(L₁))
+If L₁(J)=H
+TextColor(GREEN)
 End
+
+H→V
+prgmZOUTNUM
+
 TextColor(BLUE)
 
-1+J→J
-0→Y
-X+Xscl→X
+If I<N
+Then
+Text(X,Y,"|")
+Y+Yscl→Y
 End
+End
+X+Xscl→X
+0→Y
+Text(X,Y,"x=i+nj")
