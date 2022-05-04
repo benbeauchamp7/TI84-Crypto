@@ -5,30 +5,33 @@
 ClrList L₁
 ClrList L₂
 If F≠π
-Prompt A,B
+    Prompt A,B
 
 ClrDraw
 DispGraph
 
 If B>A
 Then
-A→R
-B→A
-R→B
+    A→R
+    B→A
+    R→B
 End
 
-Text(X,Y,"A:")
-Y+2*Yscl→Y
-A→V
-prgmZOUTNUM
+If S≠π
+Then
+    Text(X,Y,"A:")
+    Y+2*Yscl→Y
+    A→V
+    prgmZOUTNUM
 
-Text(X,Y,"B:")
-Y+2*Yscl→Y
-B→V
-prgmZOUTNUM
-X+Xscl→X
+    Text(X,Y,"B:")
+    Y+2*Yscl→Y
+    B→V
+    prgmZOUTNUM
+    X+Xscl→X
 
-0→Y
+    0→Y
+End
 
 A→θ
 prgmZGETLEN
@@ -39,98 +42,114 @@ prgmZGETLEN
 L→L₁(2)
 
 While R
-If B>A
+    If B>A
+    Then
+        A→R
+        B→A
+        R→B
+    End
+
+    int(A/B)→L₂(I+1)
+    If S≠π
+    Then
+        prgmZCHKOVER
+
+        A→V
+        L₁(1)→M
+        prgmZOUTNUM
+
+        Text(X,Y,"=")
+        Y+Yscl→Y
+
+        int(A/B)→V
+        3→M
+        prgmZOUTNUM
+
+        Text(X,Y,"*")
+        Y+Yscl→Y
+
+        B→V
+        L₁(2)→M
+        prgmZOUTNUM
+
+        Text(X,Y,"+")
+        Y+Yscl→Y
+    End
+
+    A→θ
+    B→N
+    If π=F
+    Then
+        prgmMOD
+        Ans→θ
+    Else
+        π→F
+        prgmMOD
+        Ans→θ
+        0→F
+    End
+
+    θ→R
+    If S≠π
+    Then
+        R→V
+        prgmZOUTNUM
+    End
+    R→A
+
+    0→Y
+    X+Xscl→X
+    I+1→I
+End
+
+
+If S≠π
 Then
-A→R
-B→A
-R→B
+    X→T
+    X+Xscl→X
+    prgmZCHKOVER
+    If X-2=T
+        T→X
+
+    gcd(A,B)
+    Text(X,0,"Ans=")
+    Text(X,4*Yscl,Ans)
 End
-
-prgmZCHKOVER
-
-A→V
-L₁(1)→M
-prgmZOUTNUM
-
-Text(X,Y,"=")
-Y+Yscl→Y
-
-int(A/B)→V
-V→L₂(I+1)
-3→M
-prgmZOUTNUM
-
-Text(X,Y,"*")
-Y+Yscl→Y
-
-B→V
-L₁(2)→M
-prgmZOUTNUM
-
-Text(X,Y,"+")
-Y+Yscl→Y
-
-A→θ
-B→N
-If π=F
-Then
-prgmMOD
-Ans→θ
-Else
-π→F
-prgmMOD
-Ans→θ
-0→F
-End
-θ→R
-R→V
-prgmZOUTNUM
-R→A
-
-0→Y
-X+Xscl→X
-I+1→I
-End
-
-X→T
-X+Xscl→X
-prgmZCHKOVER
-If X-2=T
-T→X
-
-gcd(A,B)
-Text(X,0,"Ans=")
-Text(X,4*Yscl,Ans)
 
 0→M
 {1,0}→L₁
 For(I,3,dim(L₂)+1)
-L₁(I-2)-L₂(I-2)*L₁(I-1)→L₁(I)
+    L₁(I-2)-L₂(I-2)*L₁(I-1)→L₁(I)
 End
 
-X+Xscl→X
-prgmZCHKOVER
-
-0→Y
-Text(X,Y,"A:")
-Y+2*Yscl→Y
-For(I,1,dim(L₁))
-L₁(I)→V
-prgmZOUTNUM
-Y+Yscl→Y
+If S≠π
+Then
+    X+Xscl→X
+    prgmZCHKOVER
+    0→Y
+    Text(X,Y,"A:")
+    Y+2*Yscl→Y
+    For(I,1,dim(L₁))
+        L₁(I)→V
+        prgmZOUTNUM
+        Y+Yscl→Y
+    End
 End
 
 {0,1}→L₁
 For(I,3,dim(L₂)+1)
-L₁(I-2)-L₂(I-2)*L₁(I-1)→L₁(I)
+    L₁(I-2)-L₂(I-2)*L₁(I-1)→L₁(I)
 End
+
+If S=π
+    Return
 
 X+Xscl→X
 0→Y
 Text(X,Y,"B:")
 Y+2*Yscl→Y
 For(I,1,dim(L₁))
-L₁(I)→V
-prgmZOUTNUM
-Y+Yscl→Y
+    L₁(I)→V
+    prgmZOUTNUM
+    Y+Yscl→Y
 End

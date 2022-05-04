@@ -1,25 +1,41 @@
-Disp "g^-1 (mod N)"
-Prompt G,N
-π→F
-G→B
-N→A
-N→P
-prgmEUCLID
-P→N
+If F≠π
+Then
+    Disp "g^-1 (mod N)"
+    Prompt G,N
+    π→F
+    G→B
+    N→A
+    N→P
+    prgmEUCLID
+    P→N
+Else
+    G→B
+    N→A
+    N→P
+    prgmEUCLID
+    P→N
+End
 
+If S≠π
+Then
+    X+Xscl→X
+    0→Y
 
-X+Xscl→X
-0→Y
-
-TextColor(GREEN)
-G→V
-prgmZOUTNUM
-Text(X,Y,"^-1=")
-Y+4*Yscl→Y
+    TextColor(GREEN)
+    G→V
+    prgmZOUTNUM
+    Text(X,Y,"^-1=")
+    Y+4*Yscl→Y
+End
 
 L₁(dim(L₁))→θ
 prgmMOD
-Ans→V
+Ans→R
+
+If S=π
+    Return
+
+R→V
 prgmZOUTNUM
 
 Text(X,Y,"(mod ")
